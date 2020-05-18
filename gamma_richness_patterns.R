@@ -83,7 +83,8 @@ mod_preds <-
   mod_preds %>%
   bind_rows(.id = "model")
 
-ggplot() +
+p_g <- 
+  ggplot() +
   geom_point(data = gam_dat,
              mapping = aes(x = Cluster_size, y = Tot_Rich_kwant_PAS, size = Average_dist_other_mountains_km),
              alpha = 0.5, colour = "black") +
@@ -95,6 +96,11 @@ ggplot() +
   ylab("gamma diversity") +
   xlab("number of pools") +
   theme(legend.position = "none")
+  
+ggsave(filename = here("figures/intro_sem_y.png"), plot = p_g,
+         width = 12, height = 12, units = "cm", dpi = 300)
+
+
 
 
 
