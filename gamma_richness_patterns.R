@@ -51,8 +51,7 @@ summary(gam_dat)
 
 # set-up a list of different models to fit to the curve
 mod_list <- 
-  list(mod1 = c("Cluster_size"),
-       mod2 = c("Cluster_size", "I(Cluster_size^2)")
+  list(mod2 = c("Cluster_size", "I(Cluster_size^2)")
        )
 
 # set-up a range of predictor variable values
@@ -86,19 +85,20 @@ mod_preds <-
 p_g <- 
   ggplot() +
   geom_point(data = gam_dat,
-             mapping = aes(x = Cluster_size, y = Tot_Rich_kwant_PAS, size = Average_dist_other_mountains_km),
-             alpha = 0.5, colour = "black") +
+             mapping = aes(x = Cluster_size, y = Tot_Rich_kwant_PAS),
+             alpha = 0.5, colour = "black", size = 4) +
   geom_line(data = mod_preds,
             mapping = aes(x = Cluster_size, y = fitted, colour = model),
             size = 1) +
   scale_colour_viridis_d() +
   theme_classic() +
-  ylab("gamma diversity") +
-  xlab("number of pools") +
-  theme(legend.position = "none")
+  ylab("") +
+  xlab("") +
+  theme(legend.position = "none",
+        axis.text = element_text(size = 15))
   
 ggsave(filename = here("figures/intro_sem_y.png"), plot = p_g,
-         width = 12, height = 12, units = "cm", dpi = 300)
+         width = 14, height = 12, units = "cm", dpi = 300)
 
 
 
